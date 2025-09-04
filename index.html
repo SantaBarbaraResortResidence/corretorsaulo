@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santa Bárbara Resort Residence | Corretor Imobiliário</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#003087', /* Azul Escuro do anexo */
+                        secondary: '#F28C38', /* Laranja do anexo */
+                        accent: '#00C4B4', /* Verde Claro do anexo */
+                        background: '#F5F5F5', /* Cinza/Bege Claro do anexo */
+                        text: '#FFFFFF' /* Branco do anexo */
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .header-gradient {
+            background: linear-gradient(135deg, rgba(0,48,135,0.9) 0%, rgba(0,48,135,0.95) 100%);
+        }
+        .testimonial-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .property-card {
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+        .property-card:hover {
+            transform: scale(1.03);
+        }
+        .property-overlay {
+            position: absolute;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,48,135,0.9) 0%, rgba(0,48,135,0.3) 100%);
+            color: white;
+            width: 100%;
+            padding: 1rem;
+            transform: translateY(40%);
+            transition: transform 0.4s ease;
+        }
+        .property-card:hover .property-overlay {
+            transform: translateY(0);
+        }
+        .contact-button {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        section {
+            scroll-margin-top: 100px;
+        }
+        .feature-icon {
+            background-color: #F28C38; /* Laranja como destaque */
+            color: #003087; /* Azul Escuro para contraste */
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        .navbar-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 999;
+            background: white;
+            animation: fadeInDown 0.5s;
+        }
+        @keyframes fadeInDown {
+            0% {opacity: 0; transform: translateY(-20px);}
+            100% {opacity: 1; transform: translateY(0);}
+        }
+    </style>
+</head>
+<body class="bg-background text-gray-800">
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/5514998014034?text=Olá!Estou%20interessado%20no%20Resort,%20poderia%20me%20mostrar%20mais%20fotos?" 
+       target="_blank" 
+       class="fixed bottom-8 right-8 bg-accent hover:bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-4xl z-50 shadow-lg contact-button">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="bg-white py-4 shadow-md" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <span class="ml-2 font-bold text-xl text-primary">Santa Bárbara Resort Residence</span>
+                </div>
+                
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="text-primary font-semibold hover:text-secondary">Início</a>
+                    <a href="#corretor" class="text-gray-700 hover:text-primary">O Corretor</a>
+                    <a href="#destaques" class="text-gray-700 hover:text-primary">Destaques</a>
+                    <a href="#depoimentos" class="text-gray-700 hover:text-primary">Depoimentos</a>
+                    <a href="#contato" class="text-gray-700 hover:text-primary">Contato</a>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="menuBtn" class="text-primary">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden hidden absolute top-16 inset-x-0 bg-white shadow-lg py-4">
+            <div class="flex flex-col space-y-3 px-4">
+                <a href="#inicio" class="text-primary font-semibold hover:text-secondary py-2">Início</a>
+                <a href="#corretor" class="text-gray-700 hover:text-primary py-2">O Corretor</a>
+                <a href="#destaques" class="text-gray-700 hover:text-primary py-2">Destaques</a>
+                <a href="#depoimentos" class="text-gray-700 hover:text-primary py-2">Depoimentos</a>
+                <a href="#contato" class="text-gray-700 hover:text-primary py-2">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="inicio" class="relative py-20 md:py-32 header-gradient">
+        <div class="absolute inset-0 bg-gray-200 opacity-50 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1505872342847-6dbb5e76e78b?ixlib=rb-4.0.3')"></div>
+        <div class="absolute inset-0 header-gradient opacity-85"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="md:flex items-center">
+                <div class="md:w-1/2 text-white text-center md:text-left">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                        Realize o Sonho de Morar no <span class="text-secondary">Paraíso</span>
+                    </h1>
+                    <p class="text-xl mb-8">
+                        Descubra oportunidades imobiliárias exclusivas no Santa Bárbara Resort Residence, 
+                        o melhor lugar para viver em harmonia com a natureza.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
+                        <a href="#destaques" class="bg-secondary hover:bg-yellow-600 text-primary font-bold py-3 px-8 rounded-full transition duration-300 flex items-center justify-center">
+                            <i class="fas fa-home mr-2"></i>Conheça as Oportunidades
+                        </a>
+                        <a href="https://wa.me/5514998014034?text=Olá!Estou%20interessado%20no%20Resort,%20poderia%20me%20mostrar%20mais%20fotos?" class="bg-transparent border-2 border-white hover:bg-white hover:text-primary text-white font-bold py-3 px-8 rounded-full transition duration-300 flex items-center justify-center">
+                            <i class="fas fa-phone-alt mr-2"></i>Fale com o Especialista
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 mt-12 md:mt-0">
+                    <div class="bg-white rounded-xl p-6 max-w-md mx-auto shadow-2xl">
+                                     <div class="flex justify-center">
+                                        <div class="rounded-xl overflow-hidden w-64 h-64">
+                                            <img src="perfil1.jpg" alt="Foto central" class="object-cover w-full h-full rounded-xl">
+                                        </div>
+                                </div>
+
+                        <div class="mt-6 text-center">
+                            <h3 class="text-2xl font-bold text-primary">Saulo Santos 
+</h3>
+                            <p class="text-gray-600 mt-1">Corretor Especialista | Santa Bárbara Resort Residence</p>
+                            <div class="mt-4 flex justify-center space-x-4">
+                                <div class="text-center">
+                                    <p class="text-3xl font-bold text-secondary">8+</p>
+                                    <p class="text-gray-600 text-sm">Anos de Experiência</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-3xl font-bold text-secondary">10+</p>
+                                    <p class="text-gray-600 text-sm">Milhões em vendas</p>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <div class="flex justify-center">
+                                    <div class="bg-primary text-white rounded-full py-2 px-8">
+                                        <i class="fas fa-medal mr-2"></i> Especialista Certificado
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="flex justify-center my-10">
+    <div class="w-full max-w-3xl rounded-xl overflow-hidden shadow-xl">
+        <video class="w-full h-auto" controls autoplay muted loop>
+            <source src="video1.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos HTML5.
+        </video>
+    </div>
+</div>
+
+
+    <!-- Corretor Section -->
+    <section id="corretor" class="py-20 bg-background">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary">
+                    <span class="border-b-4 border-secondary pb-2">Conheça o Especialista</span>
+                </h2>
+                <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+                    Profissional com mais de 10 anos de experiência no mercado imobiliário de alto padrão
+                </p>
+            </div>
+            
+            <div class="md:flex items-center gap-12">
+                <div class="md:w-5/12 mb-10 md:mb-0">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-secondary rounded-lg transform rotate-3 opacity-50"></div>
+                        <div class="rounded-xl overflow-hidden w-full h-96 relative">
+                            <img src="perfil2.jpg" alt="Foto de perfil secundaria" class="object-cover w-full h-full rounded-xl">
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="md:w-7/12">
+                    <h3 class="text-2xl md:text-3xl font-bold text-primary mb-4">Saulo Santos</h3>
+                    <p class="text-gray-700 mb-6">
+                        Com uma paixão genuína por conectar pessoas aos seus lares dos sonhos, me especializei no Santa Bárbara Resort Residence, 
+                        onde trabalho há mais de uma década. Minha abordagem é baseada na compreensão profunda das necessidades de cada cliente, 
+                        proporcionando uma experiência imobiliária tranquila e satisfatória.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-start">
+                            <div class="bg-primary p-2 rounded-lg">
+                                <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-gray-800">Especialização Local</h4>
+                                <p class="text-gray-600">Conhecimento profundo do Santa Bárbara Resort Residence</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-primary p-2 rounded-lg">
+                                <i class="fas fa-hands-helping text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-gray-800">Atendimento Personalizado</h4>
+                                <p class="text-gray-600">Soluções sob medida para suas necessidades</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-primary p-2 rounded-lg">
+                                <i class="fas fa-file-contract text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-gray-800">Processo Seguro</h4>
+                                <p class="text-gray-600">Toda transação com acompanhamento jurídico</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-primary p-2 rounded-lg">
+                                <i class="fas fa-key text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-gray-800">Acesso Exclusivo</h4>
+                                <p class="text-gray-600">Oportunidades reservadas para meus clientes</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-accent rounded-xl p-6 border-l-4 border-secondary">
+                        <p class="text-primary font-semibold">
+                            <i class="fas fa-quote-left text-xl mr-2"></i>
+                            Minha missão é entender profundamente o que você busca para encontrar o lugar perfeito que 
+                            atenda todas as suas necessidades e realize seu sonho de viver em contato com a natureza.
+                            <i class="fas fa-quote-right text-xl ml-2"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destaques Section -->
+    <section id="destaques" class="py-20 bg-primary bg-opacity-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary">
+                    <span class="border-b-4 border-secondary pb-2">Destaques do Santa Bárbara Resort Residence</span>
+                </h2>
+                <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+                    Um lugar único onde natureza e infraestrutura se encontram para proporcionar a melhor qualidade de vida
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Infrastructure -->
+               <div class="bg-white rounded-xl shadow-xl overflow-hidden property-card">
+    <div class="h-64 relative">
+        <img src="infraestrutura.jpg" alt="Infraestrutura" class="object-cover w-full h-full">
+        <div class="property-overlay absolute bottom-0 w-full text-center bg-gradient-to-t from-blue-800 to-transparent py-4">
+            <h3 class="text-xl font-bold text-white">Infraestrutura Completa</h3>
+        </div>
+    </div>
+    <div class="p-6">
+        <div class="feature-icon text-3xl -mt-16 mb-6">
+            <i class="fas fa-road"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-primary mb-4">Infraestrutura</h3>
+        <p class="text-gray-700 mb-6">
+            Projeto urbanístico arrojado, sistema de transporte coletivo interno, 
+            abastecido pelo aquífero Guarani, de onde é extraída uma das melhores 
+            águas minerais, além de um amplo centro comercial bem ao lado da portaria. 
+        </p>
+        <ul class="space-y-2 mb-6">
+            <li class="flex items-center">
+                <i class="fas fa-check-circle text-secondary mr-2"></i>
+                Green Village Hotel e Restaurante
+            </li>
+            <li class="flex items-center">
+                <i class="fas fa-check-circle text-secondary mr-2"></i>
+                Complexo de hospedagem de alto padrão
+            </li>
+            <li class="flex items-center">
+                <i class="fas fa-check-circle text-secondary mr-2"></i>
+                Centro comercial completo
+            </li>
+        </ul>
+        <a href="https://wa.me/5514998014034?text=Olá!Estou%20interessado%20no%20Resort,%20poderia%20me%20mostrar%20mais%20fotos?" class="text-secondary font-bold flex items-center">
+            Saiba mais <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+    </div>
+</div>
+
+                
+                <!-- Nature -->
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden property-card">
+    <div class="h-64 relative">
+        <img src="ecopista.jpg" alt="Natureza Preservada" class="object-cover w-full h-full">
+        <div class="property-overlay absolute bottom-0 w-full text-center bg-gradient-to-t from-green-800 to-transparent py-4">
+            <h3 class="text-xl font-bold text-white">Natureza Preservada</h3>
+        </div>
+    </div>
+    <div class="p-6">
+        <div class="feature-icon text-3xl -mt-16 mb-6">
+            <i class="fas fa-tree"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-primary mb-4">Natureza</h3>
+        <p class="text-gray-700 mb-6">
+            Intenso contato com a natureza em seus 7 milhões de m² de área verde preservada, 
+            proporcionando belas avenidas arborizadas, fauna silvestre e ar puro. Além disso, 
+            todo empreendimento é abastecido pelo aquífero Guarani.
+        </p>
+        <ul class="space-y-2 mb-6">
+            <li class="flex items-center">
+                <i class="fas fa-check-circle text-secondary mr-2"></i>
+                7 milhões de m² de área verde
+            </li>
+            <li class="flex items-center">
+                <i class="fas fa-check-circle text-secondary mr-2"></i>
+                Fauna silvestre preservada
+            </li>
+            <li class="flex items-center">
+                <i class="fas fa-check-circle text-secondary mr-2"></i>
+                Água mineral do aquífero Guarani
+            </li>
+        </ul>
+        <a href="https://wa.me/5514998014034?text=Olá!Estou%20interessado%20no%20Resort,%20poderia%20me%20mostrar%20mais%20fotos?" class="text-secondary font-bold flex items-center">
+            Saiba mais <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+    </div>
+</div>
+
+                
+               <!-- Leisure -->
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden property-card">
+                    <div class="h-64 relative">
+                        <img src="lazer.jpg" alt="Lazer Completo" class="object-cover w-full h-full">
+                        <div class="property-overlay absolute bottom-0 w-full text-center bg-gradient-to-t from-blue-800 to-transparent py-4">
+                            <h3 class="text-xl font-bold text-white">Lazer Completo</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="feature-icon text-3xl -mt-16 mb-6">
+                            <i class="fas fa-swimmer"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-primary mb-4">Lazer</h3>
+                        <p class="text-gray-700 mb-6">
+                            Opções para a família toda e uma programação especial de eventos. SPA de nível internacional, 
+                            2 clubes, ecopista com 6 km de extensão, bike club com empréstimo gratuito de bicicletas, 
+                            minigolfe, trilha ecológica, lagos e muito mais.
+                        </p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-secondary mr-2"></i>
+                                SPA internacional e 2 clubes
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-secondary mr-2"></i>
+                                Ecopista de 6 km e trilhas
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-secondary mr-2"></i>
+                                Lagos para esportes aquáticos
+                            </li>
+                        </ul>
+                        <a href="https://wa.me/5514998014034?text=Olá!Estou%20interessado%20no%20Resort,%20poderia%20me%20mostrar%20mais%20fotos?" class="text-secondary font-bold flex items-center">
+                            Solicite mais fotos <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="rounded-xl overflow-hidden h-48 md:h-64">
+                <img src="paisagem.jpg" alt="Foto do Resort 1" class="object-cover w-full h-full">
+            </div>
+            <div class="rounded-xl overflow-hidden h-48 md:h-64">
+                <img src="paisagem2.jpg" alt="Foto do Resort 2" class="object-cover w-full h-full">
+            </div>
+            <div class="rounded-xl overflow-hidden h-48 md:h-64 md:block hidden">
+                <img src="paisagem3.jpg" alt="Foto do Resort 3" class="object-cover w-full h-full">
+            </div>
+            <div class="rounded-xl overflow-hidden h-48 md:h-64 md:block hidden">
+                <img src="paisagem4.jpg" alt="Foto do Resort 4" class="object-cover w-full h-full">
+            </div>
+        </div>
+        <div class="mt-6 text-center">
+            <a href="https://wa.me/5514998014034?text=Olá!Estou%20interessado%20no%20Resort,%20poderia%20me%20mostrar%20mais%20fotos?" class="inline-block bg-primary hover:bg-accent text-white font-bold py-3 px-8 rounded-full transition duration-300 flex items-center justify-center mx-auto">
+                <i class="fas fa-images mr-2"></i>Ver Mais Fotos do Resort
+            </a>
+        </div>
+    </div>
+</section>
+
+
+        <!-- Depoimentos Section -->
+    <section id="depoimentos" class="py-20 bg-accent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary">
+                    <span class="border-b-4 border-secondary pb-2">O Que Dizem Nossos Clientes</span>
+                </h2>
+                <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+                    Histórias reais de quem realizou o sonho de morar no Santa Bárbara Resort Residence
+                </p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-8 testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16"></div>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-gray-800">Márcia Oliveira</h4>
+                            <div class="flex text-secondary">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-4">
+                        "O (00000) foi incrível! Encontrou exatamente o que procurava no Santa Bárbara Resort Residence. 
+                        O atendimento dele foi impecável, sempre muito atencioso e profissional."
+                    </p>
+                    <div class="bg-gray-100 rounded-lg p-4 text-sm">
+                        <p>Janeiro 2025</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16"></div>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-gray-800">Roberto Santos</h4>
+                            <div class="flex text-secondary">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-4">
+                        "Comprei um lote e foi a melhor decisão que tomei. O (000000) conhecia o Resort, 
+                        me mostrou todas as vantagens e hoje estou realizando meu sonho de ter 
+                        uma casa no resort."
+                    </p>
+                    <div class="bg-gray-100 rounded-lg p-4 text-sm">
+                        <p>Setembro 2024</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16"></div>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-gray-800">Carla Mendonça</h4>
+                            <div class="flex text-secondary">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-4">
+                        "O (0000) tem um conhecimento impressionante sobre o Santa Bárbara Resort Residence. 
+                        Me ajudou a realizar meu sonho, recomendo!"
+                    </p>
+                    <div class="bg-gray-100 rounded-lg p-4 text-sm">
+                        <p>Março 2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex justify-center gap-16 text-center md:text-left mb-16">
+                <div class="mb-10 md:mb-0">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-secondary text-primary font-bold text-xl py-2 px-3 rounded">SB</div>
+                        <span class="ml-2 font-bold text-xl">Santa Bárbara Resort Residence</span>
+                    </div>
+                    <p class="max-w-xs text-gray-300">
+                        A equipe de corretores mais qualificada do Santa Bárbara Resort Residence, transformando sonhos em realidade.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="text-lg font-bold mb-4">Links Rápidos</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-secondary">Home</a></li>
+                            <li><a href="#corretor" class="text-gray-300 hover:text-secondary">O Corretora</a></li>
+                            <li><a href="#destaques" class="text-gray-300 hover:text-secondary">Destaques</a></li>
+                            <li><a href="#contato" class="text-gray-300 hover:text-secondary">Contato</a></li>
+                        </ul>
+                    </div>
+                    
+                  
+                    
+                    <div>
+                        <h4 class="text-lg font-bold mb-4">Contato</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-phone-alt text-secondary mr-2 mt-1"></i>
+                                  +55 14 99801-4034
+                            </li>
+                            <li class="flex items-start">
+                                <i class="far fa-envelope text-secondary mr-2 mt-1"></i>
+                                saulorogeriods@gmail.com
+
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-secondary mr-2 mt-1"></i>
+                                Santa Bárbara Resort Residence, SP
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>© 2025 Santa Bárbara Resort Residence. Todos os direitos reservados.</p>
+                <p class="mt-2 text-sm">CRECI 191247
+ | Responsável Técnico: Saulo Santos 
+ - CRECI 191247
+ </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('navbar-fixed');
+            } else {
+                navbar.classList.remove('navbar-fixed');
+            }
+        });
+
+        // Mobile menu toggle
+        document.getElementById('menuBtn').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                document.getElementById('mobileMenu').classList.add('hidden');
+            });
+        });
+
+        // Automatic testimonials rotation
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial-card');
+        
+        function rotateTestimonials() {
+            testimonials.forEach(card => card.classList.add('md:block'));
+            testimonials[currentTestimonial].classList.remove('md:block');
+            testimonials[currentTestimonial].classList.add('md:hidden');
+            
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            
+            setTimeout(rotateTestimonials, 5000);
+        }
+        
+        if (testimonials.length > 0) {
+            setTimeout(rotateTestimonials, 5000);
+        }
+    </script>
+</body>
+</html>
